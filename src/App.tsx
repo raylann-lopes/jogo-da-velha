@@ -8,7 +8,7 @@ interface SquareProps {
 
 function Square({ value, onSquareClick }: SquareProps) {
   return (
-    <button className="square w-30 h-30" onClick={onSquareClick}>
+    <button className="square w-25 h-20 gap-2" onClick={onSquareClick}>
       {value}
     </button>
   );
@@ -42,9 +42,9 @@ export default function Board() {
 
   return (
     <>
-      <div className="status, text-6xl py-14"> {status}</div>
+      <div className="status, text-5xl py-14"> {status}</div>
       <div className="board-row"></div>
-      <div className="board-row grid grid-cols-3 gap-2 justify-center text-4xl text-red-700">
+      <div className="board-row grid grid-cols-3 gap-2 text-3xl text-red-700">
         <Square value={squares[0]} onSquareClick={() => handleClick(0)} />
         <Square value={squares[1]} onSquareClick={() => handleClick(1)} />
         <Square value={squares[2]} onSquareClick={() => handleClick(2)} />
