@@ -4,11 +4,16 @@ import "./App.css";
 interface SquareProps {
   value: string | null;
   onSquareClick: () => void;
+  backgroundColor: string; // Nova propriedade para a cor de fundo
 }
 
-function Square({ value, onSquareClick }: SquareProps) {
+function Square({ value, onSquareClick, backgroundColor }: SquareProps) {
   return (
-    <button className="square w-25 h-20 gap-2" onClick={onSquareClick}>
+    <button
+      className="square w-25 h-20 gap-2"
+      onClick={onSquareClick}
+      style={{ backgroundColor }} // Define a cor de fundo
+    >
       {value}
     </button>
   );
@@ -42,18 +47,18 @@ export default function Board() {
 
   return (
     <>
-      <div className="status, text-5xl py-14"> {status}</div>
-      <div className="board-row"></div>
+      <div className="status text-5xl py-14"> {status}</div>
       <div className="board-row grid grid-cols-3 gap-2 text-3xl text-red-700">
-        <Square value={squares[0]} onSquareClick={() => handleClick(0)} />
-        <Square value={squares[1]} onSquareClick={() => handleClick(1)} />
-        <Square value={squares[2]} onSquareClick={() => handleClick(2)} />
-        <Square value={squares[3]} onSquareClick={() => handleClick(3)} />
-        <Square value={squares[4]} onSquareClick={() => handleClick(4)} />
-        <Square value={squares[5]} onSquareClick={() => handleClick(5)} />
-        <Square value={squares[6]} onSquareClick={() => handleClick(6)} />
-        <Square value={squares[7]} onSquareClick={() => handleClick(7)} />
-        <Square value={squares[8]} onSquareClick={() => handleClick(8)} />
+        {squares.map((square, index) => (
+          <Square
+            key={index}
+            value={square}
+            onSquareClick={() => handleClick(index)}
+            backgroundColor={
+              square === "X" ? "blue" : square === "O" ? "pink" : "white"
+            } // Define a cor com base no valor
+          />
+        ))}
       </div>
     </>
   );
