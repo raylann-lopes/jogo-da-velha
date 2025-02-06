@@ -10,9 +10,9 @@ interface SquareProps {
 function Square({ value, onSquareClick, backgroundColor }: SquareProps) {
   return (
     <button
-      className="square w-25 h-20 gap-2"
+      className={`w-24 h-24 text-3xl font-bold border-2 border-gray-800 rounded-lg transition-colors duration-300 hover:bg-gray-300`}
       onClick={onSquareClick}
-      style={{ backgroundColor }} // Define a cor de fundo
+      style={{ backgroundColor }}
     >
       {value}
     </button>
@@ -41,26 +41,42 @@ export default function Board() {
   let status;
   if (winner) {
     status = "Winner: " + winner;
+  } else if (squares.every((square) => square !== null)) {
+    status = "It's a draw!";
   } else {
     status = "Next player: " + (xIsNext ? "X" : "O");
   }
 
   return (
-    <>
-      <div className="status text-5xl py-14"> {status}</div>
-      <div className="board-row grid grid-cols-3 gap-2 text-3xl text-red-700">
+    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-4">
+      <h1 className="text-4xl font-bold text-gray-800 mb-8">Jogo da Velha</h1>
+      <div className="text-2xl font-semibold text-gray-800 mb-6">{status}</div>
+      <div className="grid grid-cols-3 gap-2">
         {squares.map((square, index) => (
           <Square
             key={index}
             value={square}
             onSquareClick={() => handleClick(index)}
             backgroundColor={
-              square === "X" ? "blue" : square === "O" ? "pink" : "white"
-            } // Define a cor com base no valor
+              square === "X"
+                ? "#ff4757"
+                : square === "O"
+                ? "#2ed573"
+                : "#ffffff"
+            }
           />
         ))}
       </div>
-    </>
+      <button
+        className="mt-8 px-6 py-2 bg-gray-800 text-white font-semibold rounded-lg hover:bg-gray-700 transition-colors duration-300"
+        onClick={() => {
+          setSquares(Array(9).fill(null));
+          setXIsNext(true);
+        }}
+      >
+        Reiniciar Jogo
+      </button>
+    </div>
   );
 }
 
