@@ -1,9 +1,6 @@
 import { useState } from "react";
 import "./App.css";
 
-// Imagem para X (substitua pelo seu próprio arquivo ou URL)
-const X_IMAGE = "https://img.icons8.com/color/96/close-window.png"; // Imagem para X
-
 interface SquareProps {
   value: string | null;
   onSquareClick: () => void;
@@ -13,11 +10,13 @@ interface SquareProps {
 function Square({ value, onSquareClick, backgroundColor }: SquareProps) {
   return (
     <button
-      className="w-20 h-20 sm:w-32 sm:h-32 flex items-center justify-center border-2 border-gray-800 rounded-lg bg-white/90 backdrop-blur-sm transition-transform duration-200 hover:scale-105 shadow-lg hover:shadow-xl"
+      className="w-18 h-18 sm:w-32 sm:h-32 flex items-center justify-center border-2 border-gray-800 rounded-lg bg-white/90 backdrop-blur-sm transition-transform duration-200 hover:scale-105 shadow-lg hover:shadow-xl"
       onClick={onSquareClick}
       style={{ backgroundColor }}
     >
-      {value === "X" && <img src={X_IMAGE} alt="X" className="w-16 h-16" />}
+      {value === "X" && (
+        <span className="text-5xl font-bold text-white">X</span>
+      )}
       {value === "O" && (
         <span className="text-5xl font-bold text-green-600">O</span>
       )}
@@ -85,10 +84,10 @@ export default function Board() {
 
       {/* Conteúdo principal */}
       <div className="bg-white/20 backdrop-blur-sm rounded-2xl p-8 shadow-2xl relative z-10">
-        <h1 className="text-3xl sm:text-5xl font-bold text-white mb-8 text-center">
+        <h1 className="text-4xl sm:text-5xl font-bold text-white mb-8 text-center">
           Jogo da Velha
         </h1>
-        <div className="text-xl sm:text-3xl font-semibold text-white mb-6 text-center">
+        <div className="text-2xl sm:text-3xl font-semibold text-white mb-6 text-center">
           {status}
         </div>
         <div className="grid grid-cols-3 gap-2 sm:gap-3">
