@@ -1,20 +1,26 @@
 import { useState } from "react";
 import "./App.css";
 
+// Imagem para X (substitua pelo seu próprio arquivo ou URL)
+const X_IMAGE = "https://img.icons8.com/color/96/close-window.png"; // Imagem para X
+
 interface SquareProps {
   value: string | null;
   onSquareClick: () => void;
-  backgroundColor: string; // Nova propriedade para a cor de fundo
+  backgroundColor: string;
 }
 
 function Square({ value, onSquareClick, backgroundColor }: SquareProps) {
   return (
     <button
-      className={`w-24 h-24 text-3xl font-bold border-2 border-gray-800 rounded-lg transition-colors duration-300 hover:bg-gray-300`}
+      className="w-24 h-24 sm:w-32 sm:h-32 flex items-center justify-center border-2 border-gray-800 rounded-lg bg-white/90 backdrop-blur-sm transition-transform duration-200 hover:scale-105 shadow-lg hover:shadow-xl"
       onClick={onSquareClick}
       style={{ backgroundColor }}
     >
-      {value}
+      {value === "X" && <img src={X_IMAGE} alt="X" className="w-16 h-16" />}
+      {value === "O" && (
+        <span className="text-5xl font-bold text-green-600">O</span>
+      )}
     </button>
   );
 }
@@ -48,34 +54,69 @@ export default function Board() {
   }
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-4">
-      <h1 className="text-4xl font-bold text-gray-800 mb-8">Jogo da Velha</h1>
-      <div className="text-2xl font-semibold text-gray-800 mb-6">{status}</div>
-      <div className="grid grid-cols-3 gap-2">
-        {squares.map((square, index) => (
-          <Square
-            key={index}
-            value={square}
-            onSquareClick={() => handleClick(index)}
-            backgroundColor={
-              square === "X"
-                ? "#ff4757"
-                : square === "O"
-                ? "#2ed573"
-                : "#ffffff"
-            }
-          />
-        ))}
+    <div className="flex flex-col items-center justify-center min-h-screen p-4 bg-gradient-to-br from-purple-500 to-indigo-600 relative overflow-hidden">
+      {/* Detalhes do fundo */}
+      <div className="absolute inset-0 flex items-center justify-center opacity-20">
+        {/* Linhas do tabuleiro */}
+        <div className="w-full h-full grid grid-cols-3 gap-2 sm:gap-3">
+          {Array.from({ length: 9 }).map((_, index) => (
+            <div
+              key={index}
+              className="border-2 border-gray-800/30 rounded-lg"
+            ></div>
+          ))}
+        </div>
       </div>
-      <button
-        className="mt-8 px-6 py-2 bg-gray-800 text-white font-semibold rounded-lg hover:bg-gray-700 transition-colors duration-300"
-        onClick={() => {
-          setSquares(Array(9).fill(null));
-          setXIsNext(true);
-        }}
-      >
-        Reiniciar Jogo
-      </button>
+      {/* Símbolos "X" e "O" espalhados */}
+      <div className="absolute inset-0 flex items-center justify-center opacity-20">
+        <span className="text-9xl text-white/30 absolute top-10 left-10">
+          X
+        </span>
+        <span className="text-9xl text-white/30 absolute top-10 right-10">
+          O
+        </span>
+        <span className="text-9xl text-white/30 absolute bottom-10 left-10">
+          O
+        </span>
+        <span className="text-9xl text-white/30 absolute bottom-10 right-10">
+          X
+        </span>
+      </div>
+
+      {/* Conteúdo principal */}
+      <div className="bg-white/20 backdrop-blur-sm rounded-2xl p-8 shadow-2xl relative z-10">
+        <h1 className="text-4xl sm:text-5xl font-bold text-white mb-8 text-center">
+          Jogo da Velha
+        </h1>
+        <div className="text-2xl sm:text-3xl font-semibold text-white mb-6 text-center">
+          {status}
+        </div>
+        <div className="grid grid-cols-3 gap-2 sm:gap-3">
+          {squares.map((square, index) => (
+            <Square
+              key={index}
+              value={square}
+              onSquareClick={() => handleClick(index)}
+              backgroundColor={
+                square === "X"
+                  ? "rgba(255, 71, 87, 0.8)"
+                  : square === "O"
+                  ? "rgba(46, 213, 115, 0.8)"
+                  : "rgba(255, 255, 255, 0.8)"
+              }
+            />
+          ))}
+        </div>
+        <button
+          className="mt-8 w-full px-6 py-2 bg-red-700 text-white font-semibold rounded-lg hover:bg-gray-100 transition-all duration-300 shadow-lg hover:shadow-xl border-2 border-gray-800"
+          onClick={() => {
+            setSquares(Array(9).fill(null));
+            setXIsNext(true);
+          }}
+        >
+          Reiniciar Jogo
+        </button>
+      </div>
     </div>
   );
 }
