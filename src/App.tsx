@@ -10,7 +10,7 @@ interface SquareProps {
 function Square({ value, onSquareClick, backgroundColor }: SquareProps) {
   return (
     <button
-      className="w-18 h-18 sm:w-32 sm:h-32 flex items-center justify-center border-2 border-gray-800 rounded-lg bg-white/90 backdrop-blur-sm transition-transform duration-200 hover:scale-105 shadow-lg hover:shadow-xl"
+      className="w-24 h-24 sm:w-32 sm:h-32 flex items-center justify-center border-2 border-gray-800 rounded-lg bg-white/90 backdrop-blur-sm transition-transform duration-200 hover:scale-105 shadow-lg hover:shadow-xl overflow-hidden"
       onClick={onSquareClick}
       style={{ backgroundColor }}
     >
@@ -53,7 +53,7 @@ export default function Board() {
   }
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen p-4 bg-gradient-to-br from-purple-500 to-indigo-600 relative overflow-hidden">
+    <div className="flex flex-col items-center justify-center w-screen h-screen p-4 bg-gradient-to-br from-purple-500 to-indigo-600 relative overflow-hidden">
       {/* Detalhes do fundo */}
       <div className="absolute inset-0 flex items-center justify-center opacity-20">
         {/* Linhas do tabuleiro */}
