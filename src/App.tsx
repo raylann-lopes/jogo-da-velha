@@ -13,7 +13,7 @@ interface SquareProps {
 function Square({ value, onSquareClick, backgroundColor }: SquareProps) {
   return (
     <button
-      className="w-24 h-24 sm:w-32 sm:h-32 flex items-center justify-center border-2 border-gray-800 rounded-lg bg-white/90 backdrop-blur-sm transition-transform duration-200 hover:scale-105 shadow-lg hover:shadow-xl"
+      className="w-20 h-20 sm:w-32 sm:h-32 flex items-center justify-center border-2 border-gray-800 rounded-lg bg-white/90 backdrop-blur-sm transition-transform duration-200 hover:scale-105 shadow-lg hover:shadow-xl"
       onClick={onSquareClick}
       style={{ backgroundColor }}
     >
@@ -46,11 +46,11 @@ export default function Board() {
   const winner = calculateWinner(squares);
   let status;
   if (winner) {
-    status = "Winner: " + winner;
+    status = "Ganhador: " + winner;
   } else if (squares.every((square) => square !== null)) {
-    status = "It's a draw!";
+    status = "Deu Velha! Reinicie o jogo.";
   } else {
-    status = "Next player: " + (xIsNext ? "X" : "O");
+    status = "Next Player: " + (xIsNext ? "X" : "O");
   }
 
   return (
@@ -85,10 +85,10 @@ export default function Board() {
 
       {/* Conteúdo principal */}
       <div className="bg-white/20 backdrop-blur-sm rounded-2xl p-8 shadow-2xl relative z-10">
-        <h1 className="text-4xl sm:text-5xl font-bold text-white mb-8 text-center">
+        <h1 className="text-3xl sm:text-5xl font-bold text-white mb-8 text-center">
           Jogo da Velha
         </h1>
-        <div className="text-2xl sm:text-3xl font-semibold text-white mb-6 text-center">
+        <div className="text-xl sm:text-3xl font-semibold text-white mb-6 text-center">
           {status}
         </div>
         <div className="grid grid-cols-3 gap-2 sm:gap-3">
