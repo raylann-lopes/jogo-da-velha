@@ -37,13 +37,13 @@ Para executar este projeto localmente, siga os passos abaixo:
    cd jogo-da-velha
    ```
 3. **Instale as dependências:
-```bash
-npm install
-```
+   ```bash
+   npm install
+   ```
 4. **Inicie o servidor de desenvolvimento:
-```bash
-npm run dev
-```
+   ```bash
+   npm run dev
+   ```
 ## Como Jogar
 
 1. **Inicie o jogo:**
@@ -86,7 +86,7 @@ Este projeto está licenciado sob a licença MIT. Consulte o arquivo LICENSE par
 
 ## Contato
 
-Para dúvidas ou sugestões:
+**Para dúvidas ou sugestões:**
 
 - Nome: Raylan Lopes
 - GitHub: raylann-lopes
